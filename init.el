@@ -1,4 +1,4 @@
- ;; My functions
+;; My functions
 
 (defun my-keymap-global-set (key symbol)
   "Globally bind KEY to the data inside SYMBOL,
@@ -8,6 +8,8 @@ if KEY is not already bound to another symbol."
 
 
 ;; Error handling
+
+;; tramp
 (when (string-equal emacs-version "29.1")
        (with-current-buffer
            (url-retrieve-synchronously
@@ -29,6 +31,8 @@ if KEY is not already bound to another symbol."
 ;; Initialize packages
 (package-initialize)
 (set 'package-install-upgrade-built-in t)
+(when (not package-archive-contents)
+  (package-refresh-contents))
 
 ;; Install use-package if not already installed
 (unless (package-installed-p 'use-package)
@@ -64,6 +68,11 @@ if KEY is not already bound to another symbol."
   (package-refresh-contents)
   (package-install 'org))
 
+;; Install emacs bug-tracker
+(unless (package-installed-p 'debbugs)
+  (package-refresh-contents)
+  (package-install 'debbugs))
+
 ;; General configurations
 
 ;; Configure mode-line
@@ -81,19 +90,6 @@ if KEY is not already bound to another symbol."
 ;; Move customization variables to a separate file and load it
 (set 'custom-file (locate-user-emacs-file "custom-vars.el"))
 (load custom-file 'noerror 'nomessage)
-
-;; Displaying of line-numbers Older emacs versions
-;; (line-number-mode 0)
-;;(use-package nlinum
-;;  :ensure t
-;;  :config
-;;  (setq nlinum-format "%4d")
-;;  (global-nlinum-mode t))
-;; (use-package linum-relative
-;;  :ensure t
-;;  :config
-;;  (linum-relative-global-mode)
-;;  (setq linum-relative-current-symbol ""))
 
 ;; Displaying of line-numbers
 (set 'display-line-numbers-type 'relative)

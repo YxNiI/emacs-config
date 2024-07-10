@@ -1,0 +1,14 @@
+/auto-save-list/
+/eln-cache/
+/elpa/
+/init.el~
+/transient/
+/url/
+/eshell/
+/places
+/bookmarks
+/#custom-vars.el#
+/custom-vars.el~
+*~
+/tramp
+/viper
